@@ -10,10 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
   <!-- Stria Icons CSS Distribution -->
-  <link rel="stylesheet" href="../../packages/stria-icons/dist/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/stria-icons@latest/dist/css/all.min.css">
   
   <!-- Stria Icons Javascript (Manual Replacer API) -->
-  <script src="../../packages/stria-icons/dist/js/stria.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/stria-icons@latest/dist/js/stria.min.js"></script>
 
   <style>
     :root {
@@ -414,7 +414,7 @@
         <div class="card-preview">
           <div class="preview-box" id="preview-sprite">
             <svg class="stria-icon" fill="currentColor">
-              <use id="sprite-use" href="../../packages/stria-icons/dist/sprites/solid.svg#gear"></use>
+              <use id="sprite-use" href="https://cdn.jsdelivr.net/npm/stria-icons@latest/dist/sprites/solid.svg#gear"></use>
             </svg>
           </div>
         </div>
@@ -529,7 +529,7 @@
       const previewSprite = document.getElementById('preview-sprite');
       previewSprite.innerHTML = `
         <svg class="stria-icon" fill="currentColor">
-          <use href="../../packages/stria-icons/dist/sprites/${style}.svg#${icon}"></use>
+          <use href="https://cdn.jsdelivr.net/npm/stria-icons@latest/dist/sprites/${style}.svg#${icon}"></use>
         </svg>
       `;
 
