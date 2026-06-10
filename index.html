@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stria Icons - HTML Starter Kit & Testbed</title>
+  <!-- Modern Inter Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Stria Icons CSS Distribution -->
+  <link rel="stylesheet" href="../../packages/stria-icons/dist/css/all.min.css">
+  
+  <!-- Stria Icons Javascript (Manual Replacer API) -->
+  <script src="../../packages/stria-icons/dist/js/stria.min.js"></script>
+
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      --card-bg: rgba(30, 41, 59, 0.45);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --primary: #818cf8;
+      --primary-hover: #6366f1;
+      --secondary: #a78bfa;
+      --success: #34d399;
+      --code-bg: rgba(15, 23, 42, 0.6);
+      --font-sans: 'Inter', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      line-height: 1.5;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #a5b4fc, #c084fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Controls Panel */
+    .controls-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .control-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .control-inputs {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    select, input[type="text"], input[type="color"] {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--card-border);
+      border-radius: 0.375rem;
+      color: var(--text-main);
+      padding: 0.5rem 1rem;
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: var(--primary);
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0.375rem;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Grid Layout for integration strategies */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Card Details */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      border-radius: 1rem;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .badge {
+      background: rgba(129, 140, 248, 0.15);
+      color: var(--primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .card-preview {
+      background: rgba(15, 23, 42, 0.3);
+      border-radius: 0.5rem;
+      padding: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 140px;
+    }
+
+    .preview-box {
+      font-size: 3rem;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: font-size 0.2s, color 0.2s;
+    }
+
+    .card-description {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      flex-grow: 1;
+    }
+
+    /* Code Block Styling */
+    .code-block {
+      background: var(--code-bg);
+      border-radius: 0.5rem;
+      padding: 1rem;
+      overflow-x: auto;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .code-block pre {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: #cbd5e1;
+    }
+
+    /* Icons showcase section */
+    .showcase-section {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 2rem;
+      margin-top: 3rem;
+    }
+
+    .showcase-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .showcase-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .showcase-item {
+      background: rgba(15, 23, 42, 0.4);
+      border: 1px solid var(--card-border);
+      border-radius: 0.75rem;
+      padding: 1.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      text-align: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .showcase-item:hover {
+      background: rgba(15, 23, 42, 0.6);
+      border-color: var(--primary);
+    }
+
+    .showcase-icon {
+      font-size: 2.25rem;
+      color: var(--text-main);
+    }
+
+    .showcase-name {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      word-break: break-all;
+    }
+
+    /* Specific sprite override to ensure sizing behaves like normal icons */
+    .stria-icon {
+      width: 1em;
+      height: 1em;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Stria Icons</h1>
+      <p>HTML Integration Template & Testbed. Test CSS Masks, Webfonts, Sprites, and Javascript replacement methods side-by-side.</p>
+    </header>
+
+    <!-- Global Controls -->
+    <div class="controls-card">
+      <div class="control-group">
+        <span class="control-label">Sample Icon</span>
+        <div class="control-inputs">
+          <select id="icon-select" onchange="updateIconPreviews()">
+            <option value="gear" selected>gear</option>
+            <option value="bell">bell</option>
+            <option value="camera">camera</option>
+            <option value="check">check</option>
+            <option value="envelope">envelope</option>
+            <option value="user">user</option>
+            <option value="circle">circle</option>
+            <option value="arrow-right">arrow-right</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <span class="control-label">Icon Style</span>
+        <div class="control-inputs">
+          <select id="style-select" onchange="updateIconPreviews()">
+            <option value="solid" selected>Solid</option>
+            <option value="regular">Regular</option>
+            <option value="light">Light</option>
+            <option value="thin">Thin</option>
+            <option value="duotone">Duotone (Mask/Sprite/JS Only)</option>
+            <option value="brands">Brands</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <span class="control-label">Icon Size</span>
+        <div class="control-inputs">
+          <select id="size-select" onchange="updateIconSize()">
+            <option value="1.5rem">1.5rem (24px)</option>
+            <option value="2rem">2rem (32px)</option>
+            <option value="3rem" selected>3rem (48px)</option>
+            <option value="4rem">4rem (64px)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <span class="control-label">Icon Color</span>
+        <div class="control-inputs">
+          <input type="color" id="color-select" value="#818cf8" oninput="updateIconColor(this.value)">
+          <input type="text" id="color-text" value="#818cf8" style="width: 100px;" oninput="updateIconColor(this.value)">
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="grid">
+      
+      <!-- Method 1: CSS Masks -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">1. CSS Masks</span>
+          <span class="badge">CSS Only</span>
+        </div>
+        <div class="card-preview">
+          <div class="preview-box" id="preview-mask">
+            <span class="stria-solid stria-gear"></span>
+          </div>
+        </div>
+        <div class="card-description">
+          Uses CSS mask properties to apply optimized SVGs dynamically. Sizing is inherited from the parent font-size, and coloring uses <code>currentColor</code>. Works for all styles, including multi-color duotone masks.
+        </div>
+        <div class="code-block">
+          <pre><code id="code-mask">&lt;span class="stria-solid stria-gear"&gt;&lt;/span&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Method 2: Webfont -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">2. Webfont (Icon Font)</span>
+          <span class="badge">CSS Only</span>
+        </div>
+        <div class="card-preview">
+          <div class="preview-box" id="preview-font">
+            <i class="st-solid st-gear"></i>
+          </div>
+        </div>
+        <div class="card-description">
+          Renders icons via traditional <code>@font-face</code> content injection (like FontAwesome). Uses Unicode characters mapped to custom font glyphs. Sizing and coloring behave like regular typography. Duotone is excluded.
+        </div>
+        <div class="code-block">
+          <pre><code id="code-font">&lt;i class="st-solid st-gear"&gt;&lt;/i&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Method 3: SVG Sprites -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">3. SVG Sprites</span>
+          <span class="badge">No JS / No Font</span>
+        </div>
+        <div class="card-preview">
+          <div class="preview-box" id="preview-sprite">
+            <svg class="stria-icon" fill="currentColor">
+              <use id="sprite-use" href="../../packages/stria-icons/dist/sprites/solid.svg#gear"></use>
+            </svg>
+          </div>
+        </div>
+        <div class="card-description">
+          Loads icons inlining SVG references via <code>&lt;use&gt;</code> pointing to the style's sprite sheet. Very performant, scales perfectly, and doesn't suffer from font load delays.
+        </div>
+        <div class="code-block">
+          <pre><code id="code-sprite">&lt;svg class="stria-icon" fill="currentColor"&gt;
+  &lt;use href="dist/sprites/solid.svg#gear"&gt;&lt;/use&gt;
+&lt;/svg&gt;</code></pre>
+        </div>
+      </div>
+
+      <!-- Method 4: Javascript Replacer API -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">4. Javascript Replacer API</span>
+          <span class="badge">Dynamic JS</span>
+        </div>
+        <div class="card-preview" style="position: relative;">
+          <div class="preview-box" id="preview-js">
+            <i data-stria="gear" data-stria-style="solid" id="js-replace-target"></i>
+          </div>
+          <button class="btn" onclick="executeJsReplacement()" style="position: absolute; bottom: 10px; right: 10px;">Run stria.replace()</button>
+        </div>
+        <div class="card-description">
+          Uses <code>stria.replace()</code> API to scan the DOM and replace placeholders containing the specified attributes into inline, styled SVGs. Re-renders clean inline vector paths.
+        </div>
+        <div class="code-block">
+          <pre><code id="code-js">&lt;i data-stria="gear" data-stria-style="solid"&gt;&lt;/i&gt;
+&lt;script&gt;
+  stria.replace();
+&lt;/script&gt;</code></pre>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Showcase Grid -->
+    <div class="showcase-section">
+      <div class="showcase-header">
+        <h2 class="showcase-title">Glyph Showcase (CSS Mask Method)</h2>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Browse sample icons from the core library rendered using the CSS Mask method.</p>
+      </div>
+      <div class="showcase-grid">
+        <div class="showcase-item">
+          <span class="showcase-icon stria-solid stria-arrow-right"></span>
+          <span class="showcase-name">arrow-right</span>
+        </div>
+        <div class="showcase-item">
+          <span class="showcase-icon stria-solid stria-bell"></span>
+          <span class="showcase-name">bell</span>
+        </div>
+        <div class="showcase-item">
+          <span class="showcase-icon stria-solid stria-camera"></span>
+          <span class="showcase-name">camera</span>
+        </div>
+        <div class="showcase-item">
+          <span class="showcase-icon stria-solid stria-check"></span>
+          <span class="showcase-name">check</span>
+        </div>
+        <div class="showcase-item">
+          <span class="showcase-icon stria-solid stria-gear"></span>
+          <span class="showcase-name">gear</span>
+        </div>
+        <div class="showcase-item">
+          <span class="showcase-icon stria-solid stria-envelope"></span>
+          <span class="showcase-name">envelope</span>
+        </div>
+        <div class="showcase-item">
+          <span class="showcase-icon stria-solid stria-user"></span>
+          <span class="showcase-name">user</span>
+        </div>
+        <div class="showcase-item">
+          <span class="showcase-icon stria-solid stria-circle"></span>
+          <span class="showcase-name">circle</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Style Prefix Maps
+    const STYLE_PREFIX = {
+      solid: 'st-solid',
+      regular: 'st-regular',
+      light: 'st-light',
+      thin: 'st-thin',
+      duotone: 'st-duotone',
+      brands: 'st-brands',
+    };
+
+    function updateIconPreviews() {
+      const icon = document.getElementById('icon-select').value;
+      const style = document.getElementById('style-select').value;
+      const size = document.getElementById('size-select').value;
+      const color = document.getElementById('color-select').value;
+
+      // Update Method 1: CSS Mask Preview
+      const previewMask = document.getElementById('preview-mask');
+      previewMask.innerHTML = `<span class="stria-${style} stria-${icon}"></span>`;
+
+      // Update Method 2: Font Preview (Duotone is not supported in font)
+      const previewFont = document.getElementById('preview-font');
+      if (style === 'duotone') {
+        previewFont.innerHTML = `<span style="font-size: 0.875rem; color: var(--text-muted);">Font N/A (Duotone)</span>`;
+      } else {
+        previewFont.innerHTML = `<i class="${STYLE_PREFIX[style]} st-${icon}"></i>`;
+      }
+
+      // Update Method 3: Sprite Preview
+      const previewSprite = document.getElementById('preview-sprite');
+      previewSprite.innerHTML = `
+        <svg class="stria-icon" fill="currentColor">
+          <use href="../../packages/stria-icons/dist/sprites/${style}.svg#${icon}"></use>
+        </svg>
+      `;
+
+      // Reset Method 4: JS Replacer Preview Target
+      const previewJs = document.getElementById('preview-js');
+      previewJs.innerHTML = `<i data-stria="${icon}" data-stria-style="${style}" id="js-replace-target"></i>`;
+
+      // Update Code Blocks
+      document.getElementById('code-mask').textContent = `<span class="stria-${style} stria-${icon}"></span\>`;
+      
+      if (style === 'duotone') {
+        document.getElementById('code-font').textContent = `<!-- Not Supported in Webfont -->`;
+      } else {
+        document.getElementById('code-font').textContent = `<i class="${STYLE_PREFIX[style]} st-${icon}"></i\>`;
+      }
+
+      document.getElementById('code-sprite').textContent = `<svg class="stria-icon" fill="currentColor">\n  <use href="dist/sprites/${style}.svg#${icon}"></use>\n</svg\>`;
+      document.getElementById('code-js').textContent = `<i data-stria="${icon}" data-stria-style="${style}"></i\>\n<script>\n  stria.replace();\n<\/script\>`;
+
+      // Reapply Colors & Sizes
+      updateIconSize();
+      updateIconColor(color);
+    }
+
+    function updateIconSize() {
+      const size = document.getElementById('size-select').value;
+      const boxes = document.querySelectorAll('.preview-box');
+      boxes.forEach(box => {
+        box.style.fontSize = size;
+      });
+    }
+
+    function updateIconColor(val) {
+      document.getElementById('color-select').value = val;
+      document.getElementById('color-text').value = val;
+      
+      const boxes = document.querySelectorAll('.preview-box');
+      boxes.forEach(box => {
+        box.style.color = val;
+      });
+    }
+
+    function executeJsReplacement() {
+      if (window.stria && typeof window.stria.replace === 'function') {
+        window.stria.replace({
+          attribute: 'data-stria',
+          styleAttribute: 'data-stria-style'
+        });
+      } else {
+        alert('Stria Replacer API not loaded yet. Make sure build:core has been run!');
+      }
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      // Reapply color from picker
+      updateIconColor(document.getElementById('color-select').value);
+    });
+  </script>
+</body>
+</html>
